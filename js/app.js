@@ -83,16 +83,8 @@
         }]
     }];
 
-    //Panel controller logic
-    app.controller("PanelController", function() {
-        this.tab = 1;
-        this.selectTab = function(setTab) {
-            this.tab = setTab;
-        };
-        this.isSelected = function(checkTab) {
-            return (this.tab === checkTab);
-        };
-    });
+    
+    //app.controller("PanelController", );
 
     app.controller('GalleryController', function() {
         this.current = 0;
@@ -101,12 +93,30 @@
         };
     });
 
-    app.controller('ReviewController',function(){
-    	this.review={};
-    	this.addReview= function(product){
-    		product.reviews.push(this.review);
-    		this.review={};
-    	};
+    app.controller('ReviewController', function() {
+        this.review = {};
+        this.addReview = function(product) {
+            product.reviews.push(this.review);
+            this.review = {};
+        };
+
+    });
+//Panel controller logic
+    app.directive('productPanels', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'product-panels.html',
+            controller: function() {
+			                this.tab = 1;
+			                this.selectTab = function(setTab) {
+			                    this.tab = setTab;
+			                };
+			                this.isSelected = function(checkTab) {
+			                    return (this.tab === checkTab);
+			                };
+			            },
+			controllerAs: 'panel'            
+        };
 
     });
 
