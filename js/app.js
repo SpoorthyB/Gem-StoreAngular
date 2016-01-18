@@ -1,9 +1,16 @@
 (function() {
-    var app = angular.module("store", []);
+    var app = angular.module("store", ['store-products']);
 
     app.controller("StoreController", function() {
         this.products = gems;
     });
+    //using services
+    /*app.controller('StoreController', ['$http',function($http){
+    var store = this;
+    store.products = [];
+    $http.get('/store-products.json').success(function(data){
+      store.products =  data;
+    });*/
     var gems = [{
         name: 'Azurite',
         description: "Some gems have hidden qualities beyond their luster, beyond their shine... Azurite is one of those gems.",
@@ -13,9 +20,9 @@
         color: '#CCC',
         faces: 14,
         images: [
-            "images/gem-02.gif",
-            "images/gem-05.gif",
-            "images/gem-09.gif"
+            "img/azurite1.jpg",
+            "img/azurite2.png",
+            "img/azurite3.jpg"
         ],
         reviews: [{
             stars: 5,
@@ -102,38 +109,7 @@
 
     });
 
-    app.directive("productReviews", function() {
-    return {
-      restrict: 'E',
-      templateUrl: "product-reviews.html"
-    };
-  });
-
-  app.directive("productSpecs", function() {
-    return {
-      restrict:"A",
-      templateUrl: "product-specs.html"
-    };
-  });
-  
-//Panel controller logic
-    app.directive('productPanels', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'product-panels.html',
-            controller: function() {
-			                this.tab = 1;
-			                this.selectTab = function(setTab) {
-			                    this.tab = setTab;
-			                };
-			                this.isSelected = function(checkTab) {
-			                    return (this.tab === checkTab);
-			                };
-			            },
-			controllerAs: 'panel'            
-        };
-
-    });
+    
 
 
 
